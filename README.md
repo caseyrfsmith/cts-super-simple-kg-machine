@@ -115,7 +115,7 @@ Edit `config.json` to customize behavior:
 
 ## Frontmatter schema
 
-The builder works best with structured frontmatter. Here's what it looks for:
+The builder works best with structured frontmatter. Here's what it's configured looks for by default:
 
 ```yaml
 ---
@@ -144,6 +144,8 @@ permalink: path/to/page.html
 - `updated`: Last updated date
 - `api-type`: Content type (e.g., "article", "page")
 
+All of this stuff was based on frontmatter I use on my own website (docsgoblin.com), and may or may not apply to you. Update the code as you see fit.
+
 ## Relationship types
 
 The builder detects several types of relationships between documents:
@@ -162,12 +164,12 @@ Documents that share tags are connected. More shared tags = stronger connection.
 
 **Detection:** Compares tag arrays in frontmatter  
 **Edge type:** `tag`  
-**Weight:** 0.3 Ã— (shared tags / total unique tags)
+**Weight:** 0.3 x (shared tags / total unique tags)
 
 **Example:** 
 - Article A has tags: [ai, documentation, automation]
 - Article B has tags: [ai, documentation, testing]
-- Weight: 0.3 Ã— (2 shared / 4 total) = 0.15
+- Weight: 0.3 x (2 shared / 4 total) = 0.15
 
 ### Series relationships
 Documents with sequential numbering in titles (e.g., "part 1", "part 2").

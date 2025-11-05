@@ -157,7 +157,7 @@ Direct markdown or HTML links between documents.
 **Edge type:** `link`  
 **Weight:** 1.0 (strongest connection)
 
-**Example:** Article A links to Article B in its content â†’ creates a link edge
+**Example:** Article A links to Article B in its content → creates a link edge
 
 ### Tag similarity
 Documents that share tags are connected. More shared tags = stronger connection.
@@ -186,7 +186,7 @@ Documents with sequential numbering in titles (e.g., "part 1", "part 2").
 All three are connected sequentially.
 
 ### Date proximity
-Documents published within N days of each other (configurable).
+Documents published within N days of each other (configurable). 
 
 **Detection:** Compares `published` dates in frontmatter  
 **Edge type:** `temporal`  
@@ -199,6 +199,7 @@ Documents published within N days of each other (configurable).
 The visualization (`docs/index.html`) provides an interactive graph with:
 
 ### Features
+
 - **Interactive force-directed graph** - nodes push and pull based on relationships
 - **Node coloring** - different colors for different content types
 - **Hover tooltips** - see full metadata without cluttering the view
@@ -280,6 +281,8 @@ The AI enrichment feature:
 - Cost depends on number of documents and batch size
 - Typical cost: $0.01-0.05 for ~50 documents
 
+You will likely need to edit the prompts for your own use. 
+
 ## Output format
 
 The builder generates `graph-data.json` in this format:
@@ -315,50 +318,9 @@ The builder generates `graph-data.json` in this format:
 }
 ```
 
-## Using in CI/CD
+## Example workflow
 
-Add to your GitHub Actions workflow to automatically rebuild the graph when content changes:
-
-```yaml
-name: Build Knowledge Graph
-
-on:
-  push:
-    paths:
-      - 'content/**/*.md'
-      - 'blog/**/*.md'
-
-jobs:
-  build-graph:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      
-      - name: Install dependencies
-        run: |
-          cd knowledge-graph-builder
-          npm install
-      
-      - name: Build graph
-        run: |
-          cd knowledge-graph-builder
-          npm run build
-      
-      - name: Commit graph data
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add knowledge-graph-builder/docs/graph-data.json
-          git commit -m "Update knowledge graph" || exit 0
-          git push
-```
-
-## Typical workflow
+I can't really tell you how to use this for your own project. On my site, I just have a `/knowledge-graph` directory in my public folder that contains `index.html`, `kg-viz.js`, and the graph data file. I build the updated KG using terminal commands. You'll figure out what works for you. Here's one suggestion for how you might do it. 
 
 ### For a new site
 
@@ -391,7 +353,7 @@ Run `npm run build` whenever you add new content. The graph will update automati
 You can also:
 - Set up a git hook to rebuild on commit
 - Add to your site's build script
-- Run in CI/CD (see above)
+- Run in CI/CD
 
 ## Project structure
 

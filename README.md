@@ -1,4 +1,4 @@
-# Knowledge graph builder
+# Knowledge graph builder (AKA CT's Super Simple Knowledge Graph Machine)
 
 A simple, hackable tool for building and visualizing knowledge graphs from markdown content. Built for technical writers who want to understand how knowledge graphs work by tinkering with real code.
 

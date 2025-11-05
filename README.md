@@ -8,6 +8,8 @@ This is a learning tool and portfolio project, not enterprise software. The goal
 
 The code is deliberately straightforward - no complex frameworks, just Node.js scripts that parse markdown files and generate interactive visualizations. You can read through the entire codebase in an afternoon and understand exactly how it works.
 
+This project does lean heavily on content frontmatter to build graphs. This is because I'm obsessed with metadata and I want other documentarians to be obsessed too so I have more people to talk to about it. It's also cheap, lightweight, and exceedingly satisfying to use this frontmatter to build KGs. 
+
 ## Features
 
 - Parse markdown files with frontmatter
@@ -48,12 +50,12 @@ npm install
 
 3. Run the builder:
    ```bash
-   npm run build
+   node src/graph-builder.js
    ```
 
 4. View the visualization:
    ```bash
-   npm run serve
+   npx http-server docs -p 8000 -c-1
    ```
 
 5. Open http://localhost:8000 in your browser
@@ -258,7 +260,7 @@ Use Claude API to discover deeper semantic relationships between documents that 
 
 4. Run with enrichment:
    ```bash
-   npm run build:enrich
+   node src/graph-builder.js --enrich
    ```
 
 ### How enrichment works
@@ -340,15 +342,15 @@ I can't really tell you how to use this for your own project. On my site, I just
 
 3. Build and view:
    ```bash
-   npm run build
-   npm run serve
+   node src/graph-builder.js
+   npx http-server docs -p 8000 -c-1
    ```
 
 4. Optionally, copy `docs/` to your site's public directory for hosting
 
 ### For ongoing use
 
-Run `npm run build` whenever you add new content. The graph will update automatically.
+Run `node src/graph-builder.js` whenever you add new content. The graph will update automatically.
 
 You can also:
 - Set up a git hook to rebuild on commit
@@ -394,7 +396,7 @@ To view the example visualization, open `docs/index.html` in a browser and it wi
 - Check file patterns in `config.json`
 
 ### "Graph is blank"
-- Make sure `npm run build` completed successfully
+- Make sure `node src/graph-builder.js` completed successfully
 - Check browser console for errors (F12)
 - Verify `graph-data.json` exists and has data
 - Try accessing http://localhost:8000/graph-data.json directly

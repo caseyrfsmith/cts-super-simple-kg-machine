@@ -1,0 +1,33 @@
+{
+  "name": "knowledge-graph-builder",
+  "version": "1.0.0",
+  "description": "Build and visualize knowledge graphs from markdown content with frontmatter",
+  "main": "src/graph-builder.js",
+  "type": "module",
+  "scripts": {
+    "build": "node src/graph-builder.js",
+    "build:enrich": "node src/graph-builder.js --enrich",
+    "serve": "npx http-server docs -p 8000 -c-1"
+  },
+  "keywords": [
+    "knowledge-graph",
+    "documentation",
+    "visualization",
+    "d3",
+    "markdown"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "dotenv": "^17.2.3",
+    "glob": "^10.3.10",
+    "gray-matter": "^4.0.3"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.27.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

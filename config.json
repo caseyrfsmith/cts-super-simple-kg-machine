@@ -1,0 +1,25 @@
+{
+  "contentPath": "./content",
+  "outputPath": "./docs/graph-data.json",
+  "filePatterns": ["**/*.md", "**/*.yml", "**/*.yaml"],
+  "excludePatterns": [
+    "node_modules/**",
+    "**/node_modules/**",
+    "README.md"
+  ],
+  "relationships": {
+    "detectLinks": true,
+    "detectTags": true,
+    "detectSeries": true,
+    "detectDateProximity": true,
+    "dateProximityDays": 7
+  },
+  "visualization": {
+    "colorScheme": "pastel"
+  },
+  "enrichment": {
+    "enabled": false,
+    "batchSize": 5,
+    "model": "claude-sonnet-4-20250514"
+  }
+}

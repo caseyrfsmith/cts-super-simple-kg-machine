@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>docs goblin KG visualizer</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; color: #333; }
+        #controls { position: fixed; top: 0; left: 0; right: 0; background: white; border-bottom: 1px solid #ddd; padding: 1rem; z-index: 1000; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        #controls h1 { font-size: 1.2rem; font-weight: 600; margin-right: auto; }
+        #controls input, #controls select, #controls button { padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; }
+        #controls button { background: #007bff; color: white; border: none; cursor: pointer; }
+        #controls button:hover { background: #0056b3; }
+        #graph { width: 100vw; height: 100vh; padding-top: 80px; }
+        .node { cursor: pointer; stroke: #fff; stroke-width: 2px; }
+        .node:hover { stroke: #333; stroke-width: 3px; }
+        .link { stroke: #999; stroke-opacity: 0.5; fill: none; cursor: pointer; stroke-width: 2px; transition: stroke-opacity 0.1s, stroke-width 0.1s; }
+        .link.highlighted { stroke-opacity: 1; stroke-width: 4px; }
+        .link.link-type-link { stroke: #007bff; stroke-opacity: 0.7; }
+        .link.link-type-series { stroke: #28a745; stroke-opacity: 0.7; }
+        .link.link-type-tag { stroke: #ffc107; stroke-opacity: 0.5; }
+        .link.link-type-temporal { stroke: #dc3545; stroke-opacity: 0.5; }
+        .link.link-type-semantic { stroke: #6f42c1; stroke-opacity: 0.6; stroke-dasharray: 3,3; }
+        .link.link-type-prerequisite { stroke: #fd7e14; stroke-opacity: 0.6; stroke-dasharray: 5,2; }
+        .link.link-type-contrasts { stroke: #e83e8c; stroke-opacity: 0.5; stroke-dasharray: 2,2; }
+        .node-label { 
+            font-size: 12px; 
+            pointer-events: none; 
+            fill: #333; 
+            font-weight: 500;
+            text-shadow: 
+                -1px -1px 0 #fff,
+                1px -1px 0 #fff,
+                -1px 1px 0 #fff,
+                1px 1px 0 #fff,
+                0 0 3px #fff;
+        }
+        #tooltip { position: absolute; background: white; border: 1px solid #ddd; border-radius: 4px; padding: 1rem; pointer-events: none; opacity: 0; transition: opacity 0.05s; max-width: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 2000; }
+        #tooltip h3 { margin: 0 0 0.5rem 0; font-size: 1rem; }
+        #tooltip p { margin: 0.25rem 0; font-size: 0.85rem; color: #666; }
+        #tooltip .tags { margin-top: 0.5rem; display: flex; gap: 0.25rem; flex-wrap: wrap; }
+        #tooltip .tag { background: #e9ecef; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.75rem; }
+        #legend { position: fixed; bottom: 1rem; right: 1rem; background: white; border: 1px solid #ddd; border-radius: 4px; padding: 1rem; font-size: 0.85rem; }
+        #legend h4 { margin: 0 0 0.5rem 0; font-size: 0.9rem; }
+        #legend div { display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0; }
+        #legend .legend-line { width: 30px; height: 2px; }
+        #glossary { position: fixed; bottom: 1rem; left: 16rem; background: white; border: 1px solid #ddd; border-radius: 4px; padding: 1rem; font-size: 0.85rem; max-width: 280px; }
+        #glossary h4 { margin: 0 0 0.5rem 0; font-size: 0.9rem; }
+        #glossary .glossary-item { margin: 0.5rem 0; line-height: 1.4; }
+        #glossary .glossary-item strong { color: #007bff; }
+        #stats { position: fixed; bottom: 1rem; left: 1rem; background: white; border: 1px solid #ddd; border-radius: 4px; padding: 1rem; font-size: 0.85rem; }
+        #stats div { margin: 0.25rem 0; }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <h1>docsgoblin knowledge graph</h1>
+        <input type="text" id="search" placeholder="Search nodes...">
+        <select id="filter-type"><option value="">All types</option></select>
+        <select id="filter-tag"><option value="">All tags</option></select>
+        <select id="filter-edge"><option value="">All edges</option></select>
+        <select id="layout">
+            <option value="force">Force-directed</option>
+            <option value="radial">Radial</option>
+            <option value="cluster">Clustered</option>
+        </select>
+        <label style="display: flex; align-items: center; gap: 0.5rem;">
+            <input type="checkbox" id="show-labels" checked> show labels
+        </label>
+        <button id="reset">reset view</button>
+    </div>
+    <svg id="graph"></svg>
+    <div id="tooltip"></div>
+    <div id="legend">
+        <h4>Edge types</h4>
+        <div><span class="legend-line" style="background: #007bff;"></span> Direct link</div>
+        <div><span class="legend-line" style="background: #28a745;"></span> Series</div>
+        <div><span class="legend-line" style="background: #ffc107;"></span> Shared tags</div>
+        <div><span class="legend-line" style="background: #dc3545;"></span> Date proximity</div>
+        <div><span class="legend-line" style="background: #6f42c1; opacity: 0.6;"></span> Semantic (AI)</div>
+        <div><span class="legend-line" style="background: #fd7e14; opacity: 0.6;"></span> Prerequisite (AI)</div>
+        <div><span class="legend-line" style="background: #e83e8c; opacity: 0.6;"></span> Contrasts (AI)</div>
+    </div>
+    <div id="glossary">
+        <h4>Relationship Types</h4>
+        <div class="glossary-item">
+            <strong>Links To:</strong> Direct markdown/HTML link found in content
+        </div>
+        <div class="glossary-item">
+            <strong>Same Series:</strong> Sequential parts (e.g., "part 1", "part 2")
+        </div>
+        <div class="glossary-item">
+            <strong>Shares Tags:</strong> Documents with common tags
+        </div>
+        <div class="glossary-item">
+            <strong>Published Near:</strong> Published within 7 days of each other
+        </div>
+        <div class="glossary-item">
+            <strong>Semantically Related:</strong> AI detected thematic connection
+        </div>
+        <div class="glossary-item">
+            <strong>Prerequisite:</strong> AI suggests reading order
+        </div>
+        <div class="glossary-item">
+            <strong>Contrasts With:</strong> AI found opposing approaches
+        </div>
+    </div>
+    <div id="stats">
+        <div><strong>Nodes:</strong> <span id="node-count">0</span></div>
+        <div><strong>Edges:</strong> <span id="edge-count">0</span></div>
+        <div><strong>Filtered:</strong> <span id="filtered-count">0</span></div>
+    </div>
+    <script src="kg-viz.js"></script>
+</body>
+</html>

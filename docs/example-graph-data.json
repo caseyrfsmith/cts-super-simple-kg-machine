@@ -1,0 +1,454 @@
+{
+  "nodes": [
+    {
+      "id": "webhooks-guide",
+      "title": "Webhooks Guide",
+      "summary": "Set up real-time weather alerts using webhooks instead of polling the API",
+      "type": "guide",
+      "tags": [
+        "webhooks",
+        "real-time",
+        "alerts",
+        "automation"
+      ],
+      "url": "example/webhooks-guide.html",
+      "published": "2024-01-20T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "rate-limiting",
+      "title": "Rate Limiting",
+      "summary": "Understanding API rate limits, quotas, and how to handle throttling",
+      "type": "reference",
+      "tags": [
+        "rate-limits",
+        "quotas",
+        "performance",
+        "best-practices"
+      ],
+      "url": "example/rate-limiting.html",
+      "published": "2024-01-14T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "quickstart-part-2",
+      "title": "Quickstart Tutorial, Part 2",
+      "summary": "Fetch forecasts and historical data to build a complete weather app",
+      "type": "tutorial",
+      "tags": [
+        "tutorial",
+        "getting-started",
+        "quickstart",
+        "forecasts"
+      ],
+      "url": "example/quickstart-part-2.html",
+      "published": "2024-01-17T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "quickstart-part-1",
+      "title": "Quickstart Tutorial, Part 1",
+      "summary": "Make your first API request and get current weather data",
+      "type": "tutorial",
+      "tags": [
+        "tutorial",
+        "getting-started",
+        "quickstart"
+      ],
+      "url": "example/quickstart-part-1.html",
+      "published": "2024-01-16T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "migration-guide",
+      "title": "Migrating from v1 to v2",
+      "summary": "Complete guide for upgrading to WeatherFlow API v2 with minimal disruption",
+      "type": "guide",
+      "tags": [
+        "migration",
+        "versioning",
+        "deprecation",
+        "upgrade"
+      ],
+      "url": "example/migration-guide.html",
+      "published": "2024-01-25T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "getting-started",
+      "title": "Getting Started with WeatherFlow API",
+      "summary": "Learn how to get up and running with the WeatherFlow API in minutes",
+      "type": "guide",
+      "tags": [
+        "getting-started",
+        "basics",
+        "tutorial"
+      ],
+      "url": "example/getting-started.html",
+      "published": "2024-01-15T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "summary": "How to handle API errors, retry logic, and debugging common issues",
+      "type": "reference",
+      "tags": [
+        "errors",
+        "debugging",
+        "troubleshooting",
+        "best-practices"
+      ],
+      "url": "example/error-handling.html",
+      "published": "2024-01-18T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "best-practices",
+      "title": "Best Practices",
+      "summary": "Production-ready patterns for building reliable weather applications",
+      "type": "guide",
+      "tags": [
+        "best-practices",
+        "performance",
+        "security",
+        "optimization"
+      ],
+      "url": "example/best-practices.html",
+      "published": "2024-01-22T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "authentication",
+      "title": "Authentication",
+      "summary": "How to authenticate with the WeatherFlow API using API keys",
+      "type": "reference",
+      "tags": [
+        "security",
+        "authentication",
+        "api-keys"
+      ],
+      "url": "example/authentication.html",
+      "published": "2024-01-10T00:00:00.000Z",
+      "updated": null
+    },
+    {
+      "id": "api-overview",
+      "title": "API Overview",
+      "summary": "Understanding WeatherFlow's API structure, endpoints, and data models",
+      "type": "reference",
+      "tags": [
+        "reference",
+        "api-design",
+        "data-models"
+      ],
+      "url": "example/api-overview.html",
+      "published": "2024-01-12T00:00:00.000Z",
+      "updated": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "webhooks-guide",
+      "target": "authentication",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "webhooks-guide",
+      "target": "best-practices",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "webhooks-guide",
+      "target": "error-handling",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "webhooks-guide",
+      "target": "rate-limiting",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "rate-limiting",
+      "target": "error-handling",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "rate-limiting",
+      "target": "best-practices",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "rate-limiting",
+      "target": "authentication",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "quickstart-part-2",
+      "target": "quickstart-part-1",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "quickstart-part-2",
+      "target": "rate-limiting",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "quickstart-part-2",
+      "target": "error-handling",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "quickstart-part-2",
+      "target": "webhooks-guide",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "quickstart-part-2",
+      "target": "best-practices",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "quickstart-part-1",
+      "target": "getting-started",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "quickstart-part-1",
+      "target": "error-handling",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "migration-guide",
+      "target": "error-handling",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "migration-guide",
+      "target": "authentication",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "migration-guide",
+      "target": "rate-limiting",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "migration-guide",
+      "target": "webhooks-guide",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "migration-guide",
+      "target": "api-overview",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "migration-guide",
+      "target": "best-practices",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "getting-started",
+      "target": "authentication",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "getting-started",
+      "target": "api-overview",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "getting-started",
+      "target": "best-practices",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "getting-started",
+      "target": "rate-limiting",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "getting-started",
+      "target": "error-handling",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "error-handling",
+      "target": "authentication",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "error-handling",
+      "target": "api-overview",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "error-handling",
+      "target": "best-practices",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "best-practices",
+      "target": "authentication",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "api-overview",
+      "target": "authentication",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "api-overview",
+      "target": "rate-limiting",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "api-overview",
+      "target": "webhooks-guide",
+      "type": "link",
+      "weight": 1
+    },
+    {
+      "source": "rate-limiting",
+      "target": "best-practices",
+      "type": "tag",
+      "weight": 0.09999999999999999
+    },
+    {
+      "source": "rate-limiting",
+      "target": "error-handling",
+      "type": "tag",
+      "weight": 0.04285714285714285
+    },
+    {
+      "source": "error-handling",
+      "target": "best-practices",
+      "type": "tag",
+      "weight": 0.04285714285714285
+    },
+    {
+      "source": "quickstart-part-2",
+      "target": "quickstart-part-1",
+      "type": "tag",
+      "weight": 0.22499999999999998
+    },
+    {
+      "source": "quickstart-part-2",
+      "target": "getting-started",
+      "type": "tag",
+      "weight": 0.12
+    },
+    {
+      "source": "quickstart-part-1",
+      "target": "getting-started",
+      "type": "tag",
+      "weight": 0.15
+    },
+    {
+      "source": "best-practices",
+      "target": "authentication",
+      "type": "tag",
+      "weight": 0.049999999999999996
+    },
+    {
+      "source": "quickstart-part-1",
+      "target": "quickstart-part-2",
+      "type": "series",
+      "weight": 0.8
+    },
+    {
+      "source": "webhooks-guide",
+      "target": "rate-limiting",
+      "type": "semantic",
+      "weight": 0.7,
+      "theme": "real-time data challenges"
+    },
+    {
+      "source": "quickstart-part-1",
+      "target": "rate-limiting",
+      "type": "semantic",
+      "weight": 0.6,
+      "theme": "beginner optimization concerns"
+    },
+    {
+      "source": "webhooks-guide",
+      "target": "quickstart-part-2",
+      "type": "contrasts",
+      "weight": 0.8,
+      "theme": "polling versus push strategies"
+    },
+    {
+      "source": "migration-guide",
+      "target": "rate-limiting",
+      "type": "semantic",
+      "weight": 0.5,
+      "theme": "version upgrade considerations"
+    },
+    {
+      "source": "getting-started",
+      "target": "error-handling",
+      "type": "semantic",
+      "weight": 0.7,
+      "theme": "beginner to production journey"
+    },
+    {
+      "source": "authentication",
+      "target": "best-practices",
+      "type": "semantic",
+      "weight": 0.6,
+      "theme": "security implementation patterns"
+    },
+    {
+      "source": "api-overview",
+      "target": "error-handling",
+      "type": "semantic",
+      "weight": 0.5,
+      "theme": "practical api implementation"
+    },
+    {
+      "source": "getting-started",
+      "target": "best-practices",
+      "type": "contrasts",
+      "weight": 0.8,
+      "theme": "quick start versus robust design"
+    }
+  ],
+  "metadata": {
+    "generated": "2025-11-05T03:13:59.426Z",
+    "nodeCount": 10,
+    "edgeCount": 48,
+    "enriched": true
+  }
+}
